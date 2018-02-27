@@ -6,24 +6,25 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Main extends Application implements EventHandler<ActionEvent> {
-
-    private Button button;
-    private Button button2;
+public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         primaryStage.setTitle("Here goes the Title");
-        button = new Button("Click me!");
-        button2 = new Button("Click me maybe.");
+        Button button = new Button("Click me!");
+        Button button2 = new Button("Click me maybe.");
         //or button.setText("Click me!");
-        button.setOnAction(this);
-        button2.setOnAction(this);
+        button.setOnAction(e -> System.out.println("Whats up?"));
+        button2.setOnAction(e -> {
+                     System.out.println("I am up!");
+                     System.out.println("Yes, I am!");
+                }
+        );
 
         StackPane layout = new StackPane();
         layout.getChildren().addAll(button, button2);
@@ -31,17 +32,5 @@ public class Main extends Application implements EventHandler<ActionEvent> {
         Scene scene = new Scene(layout, 300, 250);
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    @Override
-    public void handle(ActionEvent event) {
-        if(event.getSource() == button) {
-            System.out.println("Hey there, button 2 is up!");
-            button.toBack();
-        }
-        if(event.getSource() == button2) {
-            System.out.println("Whats up?");
-            button.toFront();
-        }
     }
 }
