@@ -46,7 +46,7 @@ public class Main extends Application {
     }
 
     private void closeProgram() {
-        Boolean answer = ConfirmBox.confirm("Exit the program", "Sure you want to exit?");
+        boolean answer = ConfirmBox.confirm("Exit the program", "Sure you want to exit?");
         if (answer) {
             System.out.println("Something is done before program closes");
             window.close();
