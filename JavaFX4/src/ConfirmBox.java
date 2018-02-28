@@ -19,7 +19,7 @@ public class ConfirmBox {
         window.setMinWidth(250);
         Label label = new Label();
         label.setText(message);
-        
+
         Button yesBtn = new Button("Yes");
         Button noBtn = new Button("No");
 

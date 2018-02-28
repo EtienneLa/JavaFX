@@ -8,14 +8,21 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    Stage window;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
-        Stage window = primaryStage;
+        window = primaryStage;
         window.setTitle("Window 1");
+
+        window.setOnCloseRequest(event -> {
+            event.consume();
+            closeProgram();
+        });
 
         Button popoutBtn = new Button("Pop out window!");
         popoutBtn.setOnAction(e -> AlertBox.display("Alert Box", "it popped out, great!"));
@@ -27,11 +34,22 @@ public class Main extends Application {
                 System.out.println("add some funny jokes here.");
         });
 
-        VBox layout = new VBox(10, popoutBtn, confirmBtn);
+        Button closeBtn = new Button("Close program!");
+        closeBtn.setOnAction(event -> closeProgram());
+
+        VBox layout = new VBox(10, popoutBtn, confirmBtn, closeBtn);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout, 300, 200);
         window.setScene(scene);
         window.show();
+    }
+
+    private void closeProgram() {
+        Boolean answer = ConfirmBox.confirm("Exit the program", "Sure you want to exit?");
+        if (answer) {
+            System.out.println("Something is done before program closes");
+            window.close();
+        }
     }
 }
